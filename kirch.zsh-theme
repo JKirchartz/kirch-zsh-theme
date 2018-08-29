@@ -1,7 +1,5 @@
 # kirch zsh theme
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}[%{$fg_bold[white]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}%{$fg[red]%}] "
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[cyan]%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[cyan]%}%{✚%G%}"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=cyan'
@@ -57,7 +55,7 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo -n " `prompt_location` "
+    echo -n "${$PWD/$HOME/~}"
     p_colour red
     echo -n "──"
     p_reset
@@ -93,7 +91,6 @@ PROMPT='%{%f%b%k%}$(build_prompt) '
 precmd(){
     echo
     printf '\e[0;31m%*s\n\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
-    echo
     printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
 }
 
