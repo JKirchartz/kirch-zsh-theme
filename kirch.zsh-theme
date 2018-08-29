@@ -55,7 +55,7 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo -n "${$PWD/$HOME/~}"
+    echo -n "${$(PWD)/$HOME/~}"
     p_colour red
     echo -n "──"
     p_reset
@@ -90,7 +90,7 @@ PROMPT='%{%f%b%k%}$(build_prompt) '
 
 precmd(){
     echo
-    printf '\e[0;31m%*s\n\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
+    printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
     printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
 }
 
