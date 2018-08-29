@@ -8,7 +8,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=cyan'
 
 ### Prompt colour helpers
 p_colour() {
-  local colour=$1 || 'blue'
+  local colour=$1 || 'cyan'
 
   echo -n "%{%F{$colour}%}"
 }
@@ -57,30 +57,30 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    p_colour blue
+    p_colour cyan
     echo -n "┌─"
     p_reset
     p_colour cyan
     echo -n " `prompt_context` "
-    p_colour blue
+    p_colour cyan
     echo -n "──"
     p_reset
     p_colour green
     echo -n " `prompt_location` "
     # echo -n " %~ "
     p_reset
-    p_colour blue
+    p_colour cyan
     echo -n "──"
     p_reset
     echo -n " `git_super_status` "
     p_reset
     RETVAL=$?
     printf "\n"
-    p_colour blue
+    p_colour cyan
     echo -n "└─"
     p_reset
     echo -n " `prompt_status` "
-    p_colour blue
+    p_colour cyan
     echo -n "──"
     p_reset
 }
@@ -90,7 +90,8 @@ PROMPT='%{%f%b%k%}$(build_prompt) '
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
 precmd(){
-    printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}\n\n" '' | tr ' ' '#'
+    printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
+    echo "\n\n"
     printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
 }
 
