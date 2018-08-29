@@ -64,17 +64,6 @@ build_prompt() {
     echo -n " `prompt_context` "
     p_colour red
     echo -n "──"
-    p_reset
-    p_colour green
-    echo -n " `prompt_location` "
-    # echo -n " %~ "
-    p_reset
-    p_colour red
-    echo -n "──"
-    p_reset
-    echo -n " `git_super_status` "
-    p_reset
-    p_colour red
     echo -n "%@ ─ %j ─"
     p_reset
     RETVAL=$?
@@ -97,8 +86,12 @@ PROMPT='%{%f%b%k%}$(build_prompt) '
 
 precmd(){
     echo
-    printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
-    echo
+    printf '\e[0;31m%*s\n\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
+    echo -n " `prompt_location` "
+    p_colour red
+    echo -n "──"
+    p_reset
+    echo -n " `git_super_status` "
     printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
 }
 
