@@ -52,7 +52,7 @@ prompt_status() {
     symbols=()
     [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘%{%f%}"
     [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{magenta}%}⚙%{%f%}"
-    [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡%{%f%}" || symbols+="%{%F{cyan}%} \$${%f%}"
+    [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡%{%f%}" || symbols+="%{%F{cyan}%} $${%f%}"
     [[ -n "${VIMRUNTIME}" ]] && symbols+="(%F{white}V%F{red})"
 
     [[ -n "$symbols" ]] && echo -n "$symbols"
@@ -61,13 +61,11 @@ prompt_status() {
 ## Main prompt
 build_prompt() {
     echo "`prompt_rule`"
-    echo "\n"
-    echo -n "${$(PWD)/$HOME/~} "
+    echo -n "${$(PWD)/$HOME/~}"
     p_colour red
     echo -n "──"
     p_reset
     echo -n " `git_super_status` "
-    echo "\n"
     p_colour red
     echo -n "┌─"
     p_reset
@@ -75,7 +73,7 @@ build_prompt() {
     echo -n " `prompt_context` "
     p_colour red
     echo -n "──"
-    echo -n "%W %* ─ %j ─"
+    echo -n " %W %* ─ %j ─"
     p_reset
     RETVAL=$?
     printf "\n"
