@@ -16,6 +16,11 @@ p_reset() {
 }
 
 ### Prompt components
+
+prompt_rule() {
+    printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
+}
+
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
     local user=`whoami`
@@ -55,12 +60,14 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo -n "${$(PWD)/$HOME/~}"
+    echo "`prompt_rule`"
+    echo "\n"
+    echo -n "${$(PWD)/$HOME/~} "
     p_colour red
     echo -n "──"
     p_reset
     echo -n " `git_super_status` "
-    echo
+    echo "\n"
     p_colour red
     echo -n "┌─"
     p_reset
@@ -68,7 +75,7 @@ build_prompt() {
     echo -n " `prompt_context` "
     p_colour red
     echo -n "──"
-    echo -n "%@ ─ %j ─"
+    echo -n "%W %* ─ %j ─"
     p_reset
     RETVAL=$?
     printf "\n"
@@ -78,7 +85,7 @@ build_prompt() {
     p_colour red
     echo -n "─ %h ─"
     p_reset
-    echo -n " `prompt_status` "
+    echo -n "`prompt_status`"
     p_colour cyan
     echo -n ">"
     p_reset
@@ -86,21 +93,13 @@ build_prompt() {
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
-PROMPT='%{%f%b%k%}$(build_prompt) '
-
 precmd(){
     echo
-    printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
-    printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
 }
 
 preexec(){
-    printf '\e]0;%s [%s@%s: %s]\a' "$2" "${prompt_user}" "${prompt_host}" "${prompt_char}"		
+    # printf '\e]0;%s [%s@%s: %s]\a' "$2" "${prompt_user}" "${prompt_host}" "${prompt_char}"		
 }
-
-
-
-
 
 # original prompt from zshrc:
 
