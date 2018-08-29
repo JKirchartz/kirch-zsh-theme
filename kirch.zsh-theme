@@ -57,6 +57,12 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
+    echo -n " `prompt_location` "
+    p_colour red
+    echo -n "──"
+    p_reset
+    echo -n " `git_super_status` "
+    echo
     p_colour red
     echo -n "┌─"
     p_reset
@@ -87,11 +93,7 @@ PROMPT='%{%f%b%k%}$(build_prompt) '
 precmd(){
     echo
     printf '\e[0;31m%*s\n\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
-    echo -n " `prompt_location` "
-    p_colour red
-    echo -n "──"
-    p_reset
-    echo -n " `git_super_status` "
+    echo
     printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
 }
 
