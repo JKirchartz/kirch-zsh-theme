@@ -49,7 +49,7 @@ prompt_status() {
     symbols=()
     [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘%{%f%}"
     [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{magenta}%}⚙%{%f%}"
-    [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡%{%f%}" || symbols+="%{%F{cyan}%}♫%{%f%}"
+    [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡%{%f%}" || symbols+="%{%F{cyan}%}♫${%f%}"
     [[ -n "${VIMRUNTIME}" ]] && symbols+="(%F{white}V%F{red})"
 
     [[ -n "$symbols" ]] && echo -n "$symbols"
@@ -81,7 +81,7 @@ build_prompt() {
     p_reset
     echo -n " `prompt_status` "
     p_colour cyan
-    echo -n "──"
+    echo -n ">"
     p_reset
 }
 
@@ -90,8 +90,9 @@ PROMPT='%{%f%b%k%}$(build_prompt) '
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
 precmd(){
+    echo
     printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
-    echo "\n\n"
+    echo
     printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
 }
 
@@ -103,19 +104,8 @@ preexec(){
 
 
 
-# }}}----------------------------
-# original prompt from zshrc
-# ----------------------------{{{
+# original prompt from zshrc:
 
-# 	VIM_PROMPT="%{$fg_bold[white]%} [% NORMAL]%  %{$reset_color%}"
-# 	RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
-# 	zle reset-prompt
-# }
-
-# zle -N zle-line-init
-# zle -N zle-keymap-select
-
-# prompt
 # PS1=$'\n\n'"%F{white}%d $(git_super_status)"$'\n'"%F{red}┌─[%F{cyan}%n@%m%F{red}]-[%F{cyan}%D{%x %X}%F{red}]-[%F{cyan}%j%F{red}]"$'\n'"%F{red}└─[%F{cyan}%!%F{red}]-$__vim%F{cyan}%(#.#.$)>%F{white}%{$reset_color%}"
 # PS2="%F{red}└─%F{cyan}>%{$reset_color%}"
 
