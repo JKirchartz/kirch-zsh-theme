@@ -60,8 +60,7 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo -n "`prompt_rule`\n`prompt_location`"
-    # echo -n "${$(PWD)/$HOME/~} "
+    echo -n "`prompt_rule`\n`prompt_location` "
     p_colour red
     echo -n "──"
     p_reset
