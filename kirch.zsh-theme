@@ -32,14 +32,14 @@ prompt_context() {
 }
 
 prompt_location() {
-  where=$PWD
-  home=$HOME
-  work="$home/Documents/Workspace"
-  projects="$home/projects"
+  local where=$PWD
+  local home=$HOME
+  local work="$home/Documents/Workspace"
+  local projects="$home/projects"
 
-  where="${where/$work/Δ }"
-  where="${where/$projects/π }"
-  where="${where/$home/~ }"
+  where="${where/$work/Δ}"
+  where="${where/$projects/π}"
+  where="${where/$home/~}"
 
   echo -n "$where"
 }
@@ -54,38 +54,39 @@ prompt_status() {
     [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{magenta}%}⚙%{%f%}"
     [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡%{%f%}" || symbols+="%{%F{cyan}%} \$${%f%}"
     [[ -n "${VIMRUNTIME}" ]] && symbols+="(%F{white}V%F{red})"
-
     [[ -n "$symbols" ]] && echo -n "$symbols"
 }
 
 ## Main prompt
 build_prompt() {
-    echo -n "`prompt_rule`\n`prompt_location`"
-    # echo -n "${$(PWD)/$HOME/~} "
-    p_colour red
-    echo -n "──"
-    p_reset
-    echo " `git_super_status` "
-    p_colour red
-    echo -n "┌─"
-    p_reset
-    p_colour cyan
-    echo -n " `prompt_context` "
-    p_colour red
-    echo -n "──"
-    echo " %W %* ─ %j ─"
-    p_reset
+    local output
+    output="`prompt_rule`\n`prompt_location`"
+    # output += "${$(PWD)/$HOME/~} "
+    output+=p_colour red
+    output+="──"
+    output+=p_reset
+    output+=echo " `git_super_status` \n"
+    output+=p_colour red
+    output+="┌─"
+    output+=p_reset
+    output+=p_colour cyan
+    output+=" `prompt_context` "
+    output+=p_colour red
+    output+="──"
+    output+=" %W %* ─ %j ─\n"
+    output+=p_reset
     RETVAL=$?
-    p_colour red
-    echo -n "└─"
-    p_reset
-    p_colour red
-    echo -n "─ %h ─"
-    p_reset
-    echo -n "`prompt_status`"
-    p_colour cyan
-    echo -n ">"
-    p_reset
+    output+=p_colour red
+    output+="└─"
+    output+=p_reset
+    output+=p_colour red
+    output+="─ %h ─"
+    output+=p_reset
+    output+="`prompt_status`"
+    output+=p_colour cyan
+    output+=">"
+    output+=p_reset
+    echo -n $output
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
