@@ -37,9 +37,9 @@ prompt_location() {
   work="$home/Documents/Workspace"
   projects="$home/projects"
 
-  where="${where/$home/α }"
   where="${where/$work/Δ }"
   where="${where/$projects/π }"
+  where="${where/$home/~ }"
 
   echo -n "$where"
 }
@@ -60,8 +60,8 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo "`prompt_rule`"
-    echo -n "${$(PWD)/$HOME/~}"
+    echo -n "`prompt_rule`\n`prompt_location`"
+    # echo -n "${$(PWD)/$HOME/~} "
     p_colour red
     echo -n "──"
     p_reset
