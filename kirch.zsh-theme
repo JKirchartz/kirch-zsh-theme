@@ -60,11 +60,7 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo -n "`prompt_rule`\n`prompt_location` "
-    p_colour red
-    echo -n "──"
-    p_reset
-    echo " `git_super_status` "
+    echo "`prompt_rule`"
     p_colour red
     echo -n "┌─"
     p_reset
@@ -86,8 +82,17 @@ build_prompt() {
     echo -n ">"
     p_reset
 }
+## Right Prompt
+build_rprompt() {
+    echo -n "`prompt_location` "
+    p_colour red
+    echo -n "──"
+    p_reset
+    echo " `git_super_status` "
+}
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
+RPROMPT='%{%f%b%k%}$(build_rprompt)'
 
 precmd(){
     echo
