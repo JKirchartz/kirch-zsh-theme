@@ -61,7 +61,7 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo "`prompt_rule`\n`prompt_location` "
+    echo -n "`prompt_rule`\n`prompt_location` "
     p_colour red
     echo -n "──"
     p_reset
@@ -83,7 +83,7 @@ build_prompt() {
     p_colour red
     echo -n "─"
     RETVAL=$?
-    echo -n "\n└── "
+    echo "└── "
     p_colour cyan
     echo -n "%h"
     p_colour red
