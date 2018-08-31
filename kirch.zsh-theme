@@ -3,6 +3,7 @@
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[cyan]%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[cyan]%}%{✚%G%}"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=cyan'
+ZSH_THEME_KIRCH_RIGHT=${ZSH_THEME_KIRCH_RIGHT:=false}
 
 ### Prompt colour helpers
 p_colour() {
@@ -61,6 +62,9 @@ prompt_status() {
 ## Main prompt
 build_prompt() {
     echo "`prompt_rule`"
+    if [[ ! $ZSH_THEME_KIRCH_RIGHT ]]; then
+        echo "`build_rprompt`"
+    fi
     p_colour red
     echo -n "┌─"
     p_reset
@@ -92,7 +96,10 @@ build_rprompt() {
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
-RPROMPT='%{%f%b%k%}$(build_rprompt)'
+
+if [[ $ZSH_THEME_KIRCH_RIGHT ]]; then
+  RPROMPT='%{%f%b%k%}$(build_rprompt)'
+fi
 
 precmd(){
     echo
