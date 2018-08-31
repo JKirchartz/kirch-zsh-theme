@@ -79,11 +79,11 @@ build_prompt() {
     echo -n " ─ "
     p_reset
     p_colour cyan
-    echo -n " %j"
+    echo -n "%j"
     p_colour red
-    echo -n "─"
+    echo
     RETVAL=$?
-    echo "└── "
+    echo -n "└── "
     p_colour cyan
     echo -n "%h"
     p_colour red
