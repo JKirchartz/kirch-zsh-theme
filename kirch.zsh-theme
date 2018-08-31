@@ -62,9 +62,11 @@ prompt_status() {
 ## Main prompt
 build_prompt() {
     echo "`prompt_rule`"
-    if [[ ! ${ZSH_THEME_KIRCH_RIGHT:=false} ]]; then
-        echo "`build_rprompt`"
-    fi
+    echo -n "`prompt_location` "
+    p_colour red
+    echo -n "──"
+    p_reset
+    echo " `git_super_status` "
     p_colour red
     echo -n "┌─"
     p_reset
@@ -72,27 +74,28 @@ build_prompt() {
     echo -n " `prompt_context` "
     p_colour red
     echo -n "──"
-    echo " %W %* ─ %j ─"
     p_reset
-    RETVAL=$?
+    echo -n " %W %* "
     p_colour red
+    echo -n " ─ "
+    p_reset
+    echo -n " %j
+    p_colour red
+    echo -n "─"
+    RETVAL=$?
     echo -n "└─"
     p_reset
     p_colour red
-    echo -n "─ %h ─"
+    echo -n "─ "
     p_reset
-    echo -n "`prompt_status`"
+    echo -n "%h"
+    p_colour red
+    echo -n " ─"
+    p_reset
     p_colour cyan
+    echo -n "`prompt_status`"
     echo -n ">"
     p_reset
-}
-## Right Prompt
-build_rprompt() {
-    echo -n "`prompt_location` "
-    p_colour red
-    echo -n "──"
-    p_reset
-    echo " `git_super_status` "
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
