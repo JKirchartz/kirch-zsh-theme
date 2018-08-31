@@ -61,37 +61,33 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo "`prompt_rule`\n"
-    echo -n "`prompt_location` "
+    echo "`prompt_rule`\n`prompt_location` "
     p_colour red
     echo -n "──"
     p_reset
-    echo " `git_super_status` "
+    echo -n " `git_super_status` "
     p_colour red
-    echo -n "┌─"
+    echo -n "\n┌─"
     p_reset
     p_colour cyan
     echo -n " `prompt_context` "
     p_colour red
     echo -n "──"
-    p_reset
+    p_colour cyan
     echo -n " %W %* "
     p_colour red
     echo -n " ─ "
     p_reset
-    echo -n " %j
+    p_colour cyan
+    echo -n " %j"
     p_colour red
     echo -n "─"
     RETVAL=$?
-    echo -n "└─"
-    p_reset
-    p_colour red
-    echo -n "─ "
-    p_reset
+    echo -n "\n└── "
+    p_colour cyan
     echo -n "%h"
     p_colour red
     echo -n " ─"
-    p_reset
     p_colour cyan
     echo -n "`prompt_status`"
     echo -n ">"
