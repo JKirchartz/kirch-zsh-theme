@@ -61,7 +61,7 @@ prompt_status() {
 
 ## Main prompt
 build_prompt() {
-    echo "`prompt_rule`"
+    echo "`prompt_rule`\n"
     echo -n "`prompt_location` "
     p_colour red
     echo -n "──"
@@ -99,10 +99,6 @@ build_prompt() {
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
-
-if [[ ${ZSH_THEME_KIRCH_RIGHT:=false} ]]; then
-  RPROMPT='%{%f%b%k%}$(build_rprompt)'
-fi
 
 precmd(){
     echo
