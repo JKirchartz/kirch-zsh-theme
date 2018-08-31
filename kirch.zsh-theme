@@ -67,14 +67,14 @@ build_prompt() {
     p_reset
     echo -n " `git_super_status` "
     p_colour red
-    echo -n "\n┌─"
+    echo -n "\n┌─ "
     p_reset
     p_colour cyan
-    echo -n " `prompt_context` "
+    echo -n "`prompt_context`"
     p_colour red
-    echo -n "──"
+    echo -n " ── "
     p_colour cyan
-    echo -n " %W %* "
+    echo -n "%W %*"
     p_colour red
     echo -n " ─ "
     p_reset
