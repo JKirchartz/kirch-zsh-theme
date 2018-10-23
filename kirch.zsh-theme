@@ -19,7 +19,8 @@ p_reset() {
 ### Prompt components
 
 prompt_rule() {
-  if (($+commands[lolcat] )); then
+  # if lolcat is available, make the rule prettier
+  if (( $+commands[lolcat] )); then
     printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#' | lolcat
   else
     printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
