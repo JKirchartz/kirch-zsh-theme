@@ -19,7 +19,7 @@ p_reset() {
 ### Prompt components
 
 prompt_rule() {
-  if which lolcat > /dev/null; then
+  if (($+commands[lolcat] )); then
     printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#' | lolcat
   else
     printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '#'
