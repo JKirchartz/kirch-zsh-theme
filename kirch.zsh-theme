@@ -67,7 +67,7 @@ prompt_status() {
 ## Main prompt
 build_prompt() {
     prompt_rule
-    echo -n "\n`prompt_location` "
+    echo -n "`prompt_location` "
     p_colour red
     echo -n "──"
     p_reset
