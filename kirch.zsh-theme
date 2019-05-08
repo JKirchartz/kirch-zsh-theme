@@ -40,7 +40,7 @@ prompt_context() {
 prompt_location() {
   where=$PWD
   home=$HOME
-  work="$home/Documents/Workspace"
+  work="$home/work"
   projects="$home/projects"
 
   where="${where/$work/Δ}"
