@@ -174,7 +174,5 @@ pre_cmd() {
 }
 
 # set prompt
-# export PS0="$__cr╠╡$__nc" # returns before the output of a command
-# PROMPT="$(__prompt)$__cr╚╡$__cc\u@\h$__cr$__cc\$$__cc▸ $__nc"
-# export PS2="$__cc▸ $__nc"
+PROMPT="$(pre_cmd)$PS1"
 
