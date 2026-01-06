@@ -1,5 +1,7 @@
 # kirch zsh theme
 
+autoload -Uz vcs_info
+
 #}}}-----------------------------
 # setup prompt
 #------------------------------{{{
