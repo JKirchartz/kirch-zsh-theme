@@ -52,8 +52,8 @@ precmd() {
   echo -e '\n\e[0;31m║\e[m'
   # construct the same prompt as below, but more intelligently
   PS1="$__cr╚╡$__cc"
-  [ -e "$(jobs -p)" ] && PS1+="$__cr(${__cc}\j$__cr)$__cc"
-  [ -z "$STY$TMUX" ] && PS1+="\u@\h"
+  [ -e "$(jobs -p)" ] && PS1+="$__cr(${__cc}%j$__cr)$__cc"
+  [ -z "$STY$TMUX" ] && PS1+="%n@%m"
   [ -e "${VIMRUNTIME}" ] && PS1+="${__cr}(${__cc}vim${__cr})${__nc}"
   PS1+="$__cc\$▸ $__nc"
   export PS1
