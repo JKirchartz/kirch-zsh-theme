@@ -137,6 +137,7 @@ pre_cmd() {
   echo
   # printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '=' # ASCII-only
   # printf '\e[0;31m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | sed 's/ /═/g' # Unicode
+  vcs_info
   ## use ddate if available
   if command -v ddate > /dev/null 2>&1
   then
@@ -149,7 +150,7 @@ pre_cmd() {
   fi
   # Get directory (and git-prompt)
   DIR=$(pwd | sed -e "s!$HOME!~!")
-  PRE="${DIR} $(gitstatus)"
+  PRE="${DIR} ${vcs_info_msg_0_}"
   PRE=$(echo "$PRE" | xargs) # trim whitespace
   WID="${COLUMNS:-$(tput cols)}" # get column count from the term, or tputs
   # 7 = magic number of characters NOT to include in the HR width
